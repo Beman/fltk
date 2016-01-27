@@ -431,7 +431,7 @@ public:
 #if FLTK_ABI_VERSION >= 10304
     // Update deactivated version of icon..
     if ( _userdeicon ) delete _userdeicon;
-    if ( _usericon ) {
+    if ( 0 ) { //$ mikesart if ( _usericon ) {
       _userdeicon = _usericon->copy();
       _userdeicon->inactive();
     } else {
