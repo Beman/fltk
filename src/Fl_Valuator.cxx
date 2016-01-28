@@ -53,6 +53,7 @@ void Fl_Valuator::step(double s) {
 
 /**  Sets the step value to 1/10<SUP>digits</SUP>.*/
 void Fl_Valuator::precision(int p) {
+  if ( p > 9 ) p = 9;
   A = 1.0;
   for (B = 1; p--;) B *= 10;
 }
