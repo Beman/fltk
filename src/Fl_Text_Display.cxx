@@ -3894,6 +3894,12 @@ int Fl_Text_Display::handle(int event) {
     return Fl_Group::handle(event);
   }
 
+  // Don't steal right clicks by returning 1 - prevents popup menus from popping up, etc.
+  bool is_rightclick = ( event == FL_PUSH ) && ( Fl::event_button() != FL_LEFT_MOUSE );
+  if (is_rightclick) {
+    return(0);
+  }
+
   switch (event) {
     case FL_ENTER:
     case FL_MOVE:

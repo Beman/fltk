@@ -416,6 +416,12 @@ int Fl_Tree::handle(int e) {
     return(1);			// handled? don't continue below
   }
 
+  // Don't steal right clicks by returning 1 - prevents popup menus from popping up, etc.
+  bool is_rightclick = ( e == FL_PUSH ) && ( Fl::event_button() != FL_LEFT_MOUSE );
+  if (is_rightclick) {
+    return(0);
+  }
+
   // Handle events the child FLTK widgets didn't need
 
   // fprintf(stderr, "Fl_Tree::handle(): Event was %s (%d)\n", fl_eventnames[e], e); // DEBUGGING

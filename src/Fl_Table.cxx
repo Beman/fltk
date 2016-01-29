@@ -776,8 +776,10 @@ int Fl_Table::handle(int event) {
       //
       switch ( context ) {
         case CONTEXT_CELL:
-          // FL_PUSH on a cell?
-          ret = 1;				// express interest in FL_RELEASE
+          if ( _event_button == 1 ) {
+            // FL_PUSH on a cell?
+            ret = 1;				// express interest in FL_RELEASE
+          }
           break;
           
         case CONTEXT_NONE:
