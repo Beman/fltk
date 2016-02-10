@@ -174,6 +174,7 @@ protected:
         FULLSCREEN      = 1<<18,  ///< a fullscreen window (Fl_Window)
         MAC_USE_ACCENTS_MENU = 1<<19, ///< On the Mac OS platform, pressing and holding a key on the keyboard opens an accented-character menu window (Fl_Input_, Fl_Text_Editor)
         // (space for more flags)
+        NOTRESIZABLE    = 1<<28,  ///< Fl_Tile shouldn't resize this widget. (For menubars, etc.)
         USERFLAG3       = 1<<29,  ///< reserved for 3rd party extensions
         USERFLAG2       = 1<<30,  ///< reserved for 3rd party extensions
         USERFLAG1       = 1<<31   ///< reserved for 3rd party extensions
@@ -700,6 +701,10 @@ public:
       Normally you want to use the hide() method instead.
    */
   void clear_visible() {flags_ |= INVISIBLE;}
+
+  void set_notresizable() {flags_ |= NOTRESIZABLE; }
+  void clear_notresizable() {flags_ &= ~NOTRESIZABLE; }
+  int notresizable() { return (flags_ & NOTRESIZABLE); }
 
   /** Returns whether the widget is active.
       \retval 0 if the widget is inactive

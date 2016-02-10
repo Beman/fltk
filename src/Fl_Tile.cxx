@@ -221,6 +221,7 @@ int Fl_Tile::handle(int event) {
     for (int i=children(); i--; p += 4) {
       Fl_Widget* o = *a++;
       if (o == resizable()) continue;
+      if (o->notresizable()) continue;
       if (p[1]<q[1] && o->y()<=my+GRABAREA && o->y()+o->h()>=my-GRABAREA) {
 	int t = mx - (o->x()+o->w());
 	if (abs(t) < mindx) {
