@@ -1143,6 +1143,7 @@ void Fl_Tree::clear() {
   delete _root; _root = 0;
   _item_focus = 0;
   _lastselect = 0;
+  _vscroll->range( 0, 0 );
 } 
 
 /// Clear all the children for \p 'item'.
