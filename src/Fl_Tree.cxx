@@ -1138,6 +1138,7 @@ void Fl_Tree::clear() {
 #if FLTK_ABI_VERSION >= 10301
   _lastselect = 0;
 #endif /*FLTK_ABI_VERSION*/
+  _vscroll->range( 0, 0 );
 } 
 
 /// Clear all the children for \p 'item'.
