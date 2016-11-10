@@ -4,6 +4,8 @@
 *.o
 *.exe
 
+build/
+
 # /
 /autom4te*.cache
 /clang
