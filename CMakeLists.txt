@@ -45,6 +45,16 @@ macro(fix_default_compiler_settings_)
              CMAKE_C_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO)
         string(REPLACE "/MD" "-MT" ${flag_var} "${${flag_var}}")
     endforeach()
+
+    # http://stackoverflow.com/questions/16632578/cmake-setting-correct-compiler-options-for-one-platform-only
+    foreach (flag_var
+             CMAKE_C_FLAGS_RELEASE CMAKE_C_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO
+             CMAKE_CXX_FLAGS_RELEASE CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO)
+        # Clear /Zi, /ZI, and /Z7 flags
+        string(REGEX REPLACE "/Z[iI7]" "" ${flag_var} "${${flag_var}}")
+        # Add /Z7
+        set(${flag_var} "${${flag_var}} /Z7")
+    endforeach()
   endif()
 endmacro()
 
