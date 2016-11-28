@@ -65,6 +65,8 @@
 ///
 class Fl_Tree;
 class FL_EXPORT Fl_Tree_Item {
+protected:
+  Fl_Pixmap              *_pixmap;
 #if FLTK_ABI_VERSION >= 10303
   Fl_Tree                *_tree;		// parent tree
 #endif
@@ -83,7 +85,8 @@ class FL_EXPORT Fl_Tree_Item {
     OPEN                = 1<<0,		///> item is open
     VISIBLE             = 1<<1,		///> item is visible
     ACTIVE              = 1<<2,		///> item is active
-    SELECTED            = 1<<3		///> item is selected
+    SELECTED            = 1<<3,		///> item is selected
+    FOLDER              = 1<<4,		///> item is a folder
   };
 #if FLTK_ABI_VERSION >= 10301
   // NEW
@@ -166,6 +169,9 @@ public:
   void show_self(const char *indent = "") const;
   void label(const char *val);
   const char *label() const;
+
+  Fl_Pixmap *pixmap() const { return _pixmap; }
+  void pixmap(Fl_Pixmap *pixmap) { _pixmap = pixmap; }
 
   /// Set a user-data value for the item.
   inline void user_data( void* data ) { _userdata = data; }

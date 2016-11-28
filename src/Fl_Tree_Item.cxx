@@ -48,6 +48,7 @@ Fl_Tree_Item::Fl_Tree_Item(const Fl_Tree_Prefs &prefs) {
 //    Used by constructors
 //
 void Fl_Tree_Item::_Init(const Fl_Tree_Prefs &prefs, Fl_Tree *tree) {
+  _pixmap       = NULL;
 #if FLTK_ABI_VERSION >= 10303
   _tree         = tree;
 #endif
@@ -127,6 +128,7 @@ Fl_Tree_Item::~Fl_Tree_Item() {
 
 /// Copy constructor.
 Fl_Tree_Item::Fl_Tree_Item(const Fl_Tree_Item *o) {
+  _pixmap       = NULL;
 #if FLTK_ABI_VERSION >= 10303
   _tree             = o->_tree;
 #endif
@@ -1038,6 +1040,19 @@ int Fl_Tree_Item::draw_item_content(int render) {
     }
     if ( widget() ) widget()->damage(FL_DAMAGE_ALL);	// if there's a child widget, we just damaged it
   }
+
+    int lx = label_x()+(_label ? prefs.labelmarginleft() : 0);
+    int ly = label_y()+(label_h()/2)+(_labelsize/2)-fl_descent()/2;
+    if ( _pixmap )
+    {
+        int item_y_center = label_y() + ( label_h() / 2 );
+
+        if ( render )
+            _pixmap->draw( lx, item_y_center - _pixmap->h() / 2 );
+
+        lx += _pixmap->w() + 2;
+    }
+
   // Draw label
   if ( _label && 
        ( !widget() || 
@@ -1046,8 +1061,6 @@ int Fl_Tree_Item::draw_item_content(int render) {
       fl_color(fg);
       fl_font(_labelfont, _labelsize);
     }
-    int lx = label_x()+(_label ? prefs.labelmarginleft() : 0);
-    int ly = label_y()+(label_h()/2)+(_labelsize/2)-fl_descent()/2;
     int lw=0, lh=0;
     fl_measure(_label, lw, lh);		// get box around text (including white space)
     if ( render ) fl_draw(_label, lx, ly);
